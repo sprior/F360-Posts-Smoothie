@@ -129,7 +129,9 @@ function onOpen() {
 
 
   sequenceNumber = properties.sequenceNumberStart;
+  /*  breaks Smoothie
   writeln("%");
+  */
 
   if (programName) {
     writeComment(programName);
@@ -256,7 +258,7 @@ function onSection() {
 
     // retract to safe plane
     retracted = true;
-    writeBlock(gFormat.format(28), gAbsIncModal.format(91), "Z" + xyzFormat.format(0)); // retract
+    //writeBlock(gFormat.format(28), gAbsIncModal.format(91), "Z" + xyzFormat.format(0)); // retract
     writeBlock(gAbsIncModal.format(90));
     zOutput.reset();
   }
@@ -329,7 +331,9 @@ function onSection() {
       return;
     }
 
+    /*
     writeBlock("T" + toolFormat.format(toolNumber));
+    */
   }
 
   if ((currentSection.type != TYPE_JET) &&
@@ -425,7 +429,9 @@ function onSection() {
         gAbsIncModal.format(90),
         gMotionModal.format(0), xOutput.format(initialPosition.x), yOutput.format(initialPosition.y), feedOutput.format(highFeedrate)
       );
+      /*
       writeBlock(gMotionModal.format(0), zOutput.format(initialPosition.z), feedOutput.format(highFeedrate));
+      */
     } else {
       writeBlock(
         gAbsIncModal.format(90),
@@ -461,7 +467,7 @@ function onSpindleSpeed(spindleSpeed) {
 }
 
 function onCycle() {
-  writeBlock(gPlaneModal.format(17));
+  //writeBlock(gPlaneModal.format(17));
 }
 
 function getCommonCycle(x, y, z, r) {
@@ -762,12 +768,12 @@ function onClose() {
     writeBlock(mFormat.format(5)); // deactivate laser
   }
 
-  writeBlock(gFormat.format(28), gAbsIncModal.format(91), "Z" + xyzFormat.format(0)); // retract
+  // writeBlock(gFormat.format(28), gAbsIncModal.format(91), "Z" + xyzFormat.format(0)); // retract
   zOutput.reset();
 
   if (!machineConfiguration.hasHomePositionX() && !machineConfiguration.hasHomePositionY()) {
-    writeBlock(gFormat.format(28), gAbsIncModal.format(91), "X" + xyzFormat.format(0), "Y" + xyzFormat.format(0)); // return to home
+    // writeBlock(gFormat.format(28), gAbsIncModal.format(91), "X" + xyzFormat.format(0), "Y" + xyzFormat.format(0)); // return to home
   }
 
-  writeln("%");
+  // writeln("%");
 }
